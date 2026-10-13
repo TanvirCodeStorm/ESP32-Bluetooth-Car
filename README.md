@@ -1,173 +1,172 @@
-<div align="center">🚗 ESP32 BLUETOOTH CAR
+<div align="center">🚗 ESP32-Bluetooth-Car
 
-⚡ Wireless Control • 🤖 Robotics • 🔧 Embedded Systems
+⚡ Wireless Robotics • Smart Control • Embedded Systems
 
-A Bluetooth-controlled robot car built with ESP32, L298N and Dabble GamePad.
+A Bluetooth-controlled robotic car powered by ESP32, L298N and Dabble GamePad.
 
-<br>""ESP32" (https://img.shields.io/badge/ESP32-Microcontroller-E7352C?style=for-the-badge&logo=espressif&logoColor=white)" (https://www.espressif.com/)
-""C++" (https://img.shields.io/badge/Language-C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)" (https://isocpp.org/)
-""Bluetooth" (https://img.shields.io/badge/Control-Bluetooth-0082FC?style=for-the-badge&logo=bluetooth&logoColor=white)" (https://github.com/)
-""Driver" (https://img.shields.io/badge/Driver-L298N-orange?style=for-the-badge)" (https://www.st.com/)
+<br>""ESP32" (https://img.shields.io/badge/ESP32-Controller-E7352C?style=for-the-badge&logo=espressif&logoColor=white)" (https://www.espressif.com/)
+""C++" (https://img.shields.io/badge/C%2B%2B-Firmware-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)" (https://isocpp.org/)
+""Bluetooth" (https://img.shields.io/badge/Bluetooth-Wireless-0082FC?style=for-the-badge&logo=bluetooth&logoColor=white)" (https://github.com/)
+""L298N" (https://img.shields.io/badge/L298N-Motor_Driver-FF6F00?style=for-the-badge)" (https://www.st.com/)
 
-<br>⬆️ Forward   ⬇️ Reverse   ⬅️ Left   ➡️ Right
-
-<br>From smartphone commands to real-world motion. 🚀
+<br>⬆️ Forward　 ⬇️ Reverse　 ⬅️ Left　 ➡️ Right
 
 </div>---
 
-📑・Table of Contents
+📌 Overview
 
-#| Section
-01| ✨ "Project Highlights" (#-project-highlights)
-02| 🧰 "Components Required" (#-components-required)
-03| 🏗️ "System Architecture" (#️-system-architecture)
-04| 🔌 "Wiring Connections" (#-wiring-connections)
-05| 🗺️ "Text Wiring Diagram" (#️-text-wiring-diagram)
-06| 🎮 "Control System" (#-control-system)
-07| 💻 "Installation Guide" (#-installation-guide)
-08| 🖼️ "Project Gallery" (#️-project-gallery)
-09| 🛠️ "Troubleshooting" (#️-troubleshooting)
-10| ⚠️ "Power & Safety" (#️-power--safety)
-11| 👨‍💻 "Developer" (#-developer)
+Turn a standard two-motor robot chassis into a wireless robotic vehicle.
 
----
+This project uses an ESP32 to receive GamePad commands through Bluetooth and control two DC motors through an L298N dual H-bridge motor driver.
 
-✨ Project Highlights
+✨ Highlights
 
-«A compact robotics project that combines wireless communication, embedded programming and motor control.»
-
-- 📱 Wireless Control — Drive the car using the Dabble mobile application.
-- 🧠 ESP32 Controller — Process commands and control both motors.
-- ⚙️ Dual Motor Driver — Use the L298N to control motor direction.
-- ⚡ PWM Speed Control — Adjust motor drive duty using 8-bit PWM.
-- 🔄 Four Directions — Move forward, reverse, left and right.
-- 🔧 Beginner-Friendly Hardware — Built from common robotics components.
+- 📱 Wireless control through the Dabble GamePad.
+- ⚙️ Independent direction control for two DC motors.
+- ⚡ PWM motor control with 8-bit resolution.
+- 🔄 Forward, reverse and differential turning.
+- 🧠 ESP32-based embedded control.
+- 🔧 Simple, clearly mapped GPIO connections.
 
 ---
 
-🧰 Components Required
+🧭 Contents
 
-🔢| Component| Qty.
-1️⃣| ESP32 development board with compatible Bluetooth| 1
-2️⃣| L298N dual H-bridge motor driver| 1
-3️⃣| DC geared motors| 2
-4️⃣| Robot chassis and wheels| 1 set
-5️⃣| Suitable motor battery| 1
-6️⃣| Jumper wires| As needed
-7️⃣| USB cable| 1
+- "🏗️ System Architecture" (#️-system-architecture)
+- "🧰 Hardware Requirements" (#-hardware-requirements)
+- "🔌 Pin Connections" (#-pin-connections)
+- "🗺️ Wiring Diagram" (#️-wiring-diagram)
+- "🎮 Controls" (#-controls)
+- "💻 Software Setup" (#-software-setup)
+- "🔋 Power and Safety" (#-power-and-safety)
+- "🛠️ Troubleshooting" (#️-troubleshooting)
+- "📂 Project Structure" (#-project-structure)
+- "👨‍💻 Developer" (#-developer)
 
 ---
 
 🏗️ System Architecture
 
-<div align="center">       📱 SMARTPHONE
-       ┌───────────────┐
-       │  Dabble App   │
-       │   GamePad     │
-       └───────┬───────┘
-               │
-          📶 Bluetooth
-               │
-               ▼
-       ┌───────────────┐
-       │     ESP32     │
-       │               │
-       │ Command Logic │
-       │ Direction PWM│
-       └───────┬───────┘
-               │
-          🔌 GPIO Signals
-               │
-               ▼
-       ┌───────────────┐
-       │     L298N     │
-       │ Motor Driver  │
-       └───────┬───────┘
-               │
-          ┌────┴────┐
-          ▼         ▼
-      ⚙️ RIGHT   ⚙️ LEFT
-       MOTOR      MOTOR
+┌─────────────────────────┐
+│      📱 Smartphone      │
+│     Dabble GamePad      │
+└────────────┬────────────┘
+             │
+        Bluetooth
+             │
+             ▼
+┌─────────────────────────┐
+│         ESP32           │
+│                         │
+│  Command Processing     │
+│  Direction Control      │
+│  PWM Generation         │
+└────────────┬────────────┘
+             │
+         GPIO Signals
+             │
+             ▼
+┌─────────────────────────┐
+│      L298N DRIVER       │
+│      Dual H-Bridge      │
+└────────────┬────────────┘
+             │
+       ┌─────┴─────┐
+       ▼           ▼
+ ┌──────────┐ ┌──────────┐
+ │  RIGHT   │ │   LEFT   │
+ │  MOTOR   │ │  MOTOR   │
+ └──────────┘ └──────────┘
 
-</div>🔄 How It Works
+🔄 Operating Principle
 
-1. 📱 The user presses a directional button in Dabble.
-2. 📶 The ESP32 receives the Bluetooth command.
-3. 🧠 The program determines each motor's direction.
-4. ⚡ GPIO 22 and GPIO 23 provide PWM speed control.
-5. ⚙️ The L298N drives the two DC motors.
+1. The user presses a direction in Dabble GamePad.
+2. The ESP32 processes the command.
+3. GPIO outputs determine each motor's direction.
+4. PWM signals control the motor driver's enable inputs.
+5. The L298N drives the motors according to the commands.
 
 ---
 
-🔌 Wiring Connections
+🧰 Hardware Requirements
 
-🟦 ESP32 → L298N
+Component| Quantity
+ESP32 development board| 1
+L298N dual motor driver| 1
+DC geared motors| 2
+Robot chassis and wheels| 1 set
+Suitable motor power supply| 1
+Jumper wires| As required
+USB cable| 1
 
-ESP32 Pin| L298N Pin| Function
-"GPIO 22"| "ENA"| ⚡ Right motor PWM
-"GPIO 16"| "IN1"| 🔄 Right motor direction
-"GPIO 17"| "IN2"| 🔄 Right motor direction
-"GPIO 23"| "ENB"| ⚡ Left motor PWM
-"GPIO 18"| "IN3"| 🔄 Left motor direction
-"GPIO 19"| "IN4"| 🔄 Left motor direction
-"GND"| "GND"| 🔗 Common ground
+---
 
-🟥 L298N → Motors
+🔌 Pin Connections
+
+ESP32 → L298N
+
+ESP32 GPIO| L298N Pin| Function
+"GPIO 22"| "ENA"| Right motor PWM
+"GPIO 16"| "IN1"| Right motor direction
+"GPIO 17"| "IN2"| Right motor direction
+"GPIO 23"| "ENB"| Left motor PWM
+"GPIO 18"| "IN3"| Left motor direction
+"GPIO 19"| "IN4"| Left motor direction
+"GND"| "GND"| Common ground
+
+L298N → Motors and Power
 
 L298N Terminal| Connection
-"OUT1" + "OUT2"| ⚙️ Right DC motor
-"OUT3" + "OUT4"| ⚙️ Left DC motor
-"VS / +12V"| 🔋 Motor supply positive
-"GND"| 🔋 Motor supply negative and ESP32 GND
+"OUT1" and "OUT2"| Right DC motor
+"OUT3" and "OUT4"| Left DC motor
+"VS / +12V"| Motor supply positive
+"GND"| Motor supply negative and ESP32 ground
 
-«💡 Remember: The L298N terminal marked "+12V" is the motor supply input. You do not necessarily need a 12 V battery; use a voltage suitable for your motors and driver.»
-
-⚠️ PWM Jumper Configuration
-
-- Remove the ENA and ENB jumpers to use GPIO 22 and GPIO 23 for PWM.
-- Connect ESP32 GND to L298N GND.
-- Check the module's onboard 5 V regulator configuration before powering it.
-- Never connect the motor battery directly to the ESP32 3.3 V pin.
+«PWM configuration: Remove the ENA and ENB jumpers before using GPIO 22 and GPIO 23 for PWM speed control.»
 
 ---
 
-🗺️ Text Wiring Diagram
+🗺️ Wiring Diagram
 
-        ESP32 DEVKIT V1                L298N DRIVER
-      ┌─────────────────┐          ┌─────────────────┐
-      │                 │          │                 │
-      │ GPIO 22 ────────┼─────────►│ ENA             │
-      │ GPIO 16 ────────┼─────────►│ IN1             │
-      │ GPIO 17 ────────┼─────────►│ IN2             │
-      │                 │          │                 │
-      │ GPIO 23 ────────┼─────────►│ ENB             │
-      │ GPIO 18 ────────┼─────────►│ IN3             │
-      │ GPIO 19 ────────┼─────────►│ IN4             │
-      │                 │          │                 │
-      │ GND ────────────┼──────────┤ GND             │
-      └─────────────────┘          │                 │
-                                   │ OUT1 ──┐        │
-                                   │        ├─ RIGHT │
-                                   │ OUT2 ──┘  MOTOR │
-                                   │                 │
-                                   │ OUT3 ──┐        │
-                                   │        ├─ LEFT  │
-                                   │ OUT4 ──┘  MOTOR │
-                                   │                 │
- Battery (+) ─────────────────────►│ VS / +12V       │
- Battery (-) ─────────────────────►│ GND             │
-                                   └─────────────────┘
+       ESP32 DEVKIT                  L298N MODULE
+     ┌────────────────┐           ┌────────────────┐
+     │                │           │                │
+     │ GPIO 22 ───────┼──────────►│ ENA            │
+     │ GPIO 16 ───────┼──────────►│ IN1            │
+     │ GPIO 17 ───────┼──────────►│ IN2            │
+     │                │           │                │
+     │ GPIO 23 ───────┼──────────►│ ENB            │
+     │ GPIO 18 ───────┼──────────►│ IN3            │
+     │ GPIO 19 ───────┼──────────►│ IN4            │
+     │                │           │                │
+     │ GND ───────────┼───────────┤ GND            │
+     └────────────────┘           │                │
+                                  │ OUT1 ──┐       │
+                                  │        ├─ RIGHT│
+                                  │ OUT2 ──┘ MOTOR │
+                                  │                │
+                                  │ OUT3 ──┐       │
+                                  │        ├─ LEFT │
+                                  │ OUT4 ──┘ MOTOR │
+                                  │                │
+ Motor Supply (+) ───────────────►│ VS / +12V      │
+ Motor Supply (-) ───────────────►│ GND            │
+                                  └────────────────┘
+
+Grounding requirement: The ESP32 ground, L298N ground and motor supply negative must share a common ground.
 
 ---
 
-🎮 Control System
+🎮 Controls
 
-🎮 Dabble Button| ⚙️ Right Motor| ⚙️ Left Motor| 🚗 Action
-⬆️ UP| Forward| Forward| Move forward
-⬇️ DOWN| Reverse| Reverse| Move backward
+GamePad Button| Right Motor| Left Motor| Movement
+⬆️ UP| Forward| Forward| Forward
+⬇️ DOWN| Reverse| Reverse| Reverse
 ⬅️ LEFT| Forward| Reverse| Turn left
 ➡️ RIGHT| Reverse| Forward| Turn right
-⏹️ No direction| Stop command| Stop command| Stop driving
+⏹️ No direction| Stop command| Stop command| Stop
+
+Actual turning direction depends on motor mounting and wiring.
 
 ⚡ PWM Configuration
 
@@ -178,125 +177,91 @@ Maximum duty value| "255"
 Right motor enable| "GPIO 22"
 Left motor enable| "GPIO 23"
 
-Note: The sketch uses "ledcAttach()" and "ledcWrite(pin, duty)", compatible with the Arduino-ESP32 Core 3.x LEDC API.
+The firmware uses "ledcAttach()" and "ledcWrite(pin, duty)", as supported by the Arduino-ESP32 Core 3.x LEDC API.
 
 ---
 
-💻 Installation Guide
+💻 Software Setup
 
-1️⃣ Clone the Repository
+Requirements
 
-git clone https://github.com/TanvirCodeStorm/YOUR_REPOSITORY.git
+- Arduino IDE
+- Compatible ESP32 board package, Core 3.x
+- "DabbleESP32" library
+- Dabble mobile application
+- ESP32 board compatible with the Bluetooth mode required by the library
 
-2️⃣ Open the Arduino Sketch
+Firmware Configuration
 
-Open your ".ino" file using Arduino IDE.
+The Bluetooth device name is:
 
-3️⃣ Install the Required Library
+Dabble.begin("MyBluetoothCar");
 
-Install the "DabbleESP32" library and its dependencies.
+The sketch configures the motor pins, initializes PWM and processes GamePad inputs continuously.
 
-4️⃣ Configure Your ESP32
+Run the Project
 
-- Select the correct ESP32 board.
-- Select the correct serial port.
-- Ensure your board package supports the code's LEDC functions.
-
-5️⃣ Upload the Firmware
-
-Upload the sketch to your ESP32.
-
-6️⃣ Connect Your Phone 📱
-
-1. Power the ESP32 and motor driver.
-2. Open the Dabble application.
-3. Select the GamePad module.
-4. Connect to "MyBluetoothCar".
-5. Test the directional controls with the wheels raised.
-
-«📌 Bluetooth compatibility depends on the exact ESP32 variant and the Bluetooth mode supported by your Dabble library.»
+1. Open the Arduino sketch.
+2. Select the correct ESP32 board and serial port.
+3. Install the required Dabble library.
+4. Upload the firmware.
+5. Power the motor driver with a suitable motor supply.
+6. Open Dabble, select GamePad and connect to "MyBluetoothCar".
+7. Test movement with the wheels raised before driving.
 
 ---
 
-🖼️ Project Gallery
+🔋 Power and Safety
 
-<div align="center">🔌 Wiring Diagram
+- 🔌 Never connect motors directly to ESP32 GPIO pins.
+- 🔋 Match the motor supply to the motors' voltage and current requirements.
+- 🔗 Keep ESP32 and L298N grounds connected.
+- ⚠️ Never connect motor battery voltage directly to the ESP32 3.3 V pin.
+- ⚡ Check the L298N onboard regulator and jumper configuration.
+- 🛑 Disconnect power before modifying connections.
+- 🧪 Test the system with the wheels raised first.
 
-<img src="https://raw.githubusercontent.com/TanvirCodeStorm/YOUR_REPOSITORY/main/images/wiring-diagram.png" alt="ESP32 and L298N wiring diagram" width="90%">ESP32 GPIO connections to the L298N motor driver.
-
-<br>🚘 Robot Prototype
-
-<img src="https://raw.githubusercontent.com/TanvirCodeStorm/YOUR_REPOSITORY/main/images/car-prototype.png" alt="ESP32 Bluetooth car prototype" width="90%">The assembled Bluetooth-controlled robot car.
-
-</div>📷 
 ---
 
 🛠️ Troubleshooting
 
-❌ Problem| 🔍 Possible Cause| ✅ Solution
-Car does not move| Power or wiring issue| Check motor supply and common ground
-Only one motor works| Loose connection| Check the motor and driver terminals
-Motor spins backward| Reversed polarity| Swap the motor's two output wires
-PWM does not work| ENA/ENB jumpers installed| Remove the jumpers
-ESP32 keeps restarting| Power drop or motor interference| Improve power stability and wiring
-Bluetooth will not connect| Unsupported Bluetooth mode| Verify ESP32 and Dabble compatibility
-Compilation fails| Incorrect ESP32 core| Use a compatible Core 3.x release
+Problem| Check
+Motors do not move| Motor supply, ground and output wiring
+Only one motor works| Motor terminals and driver channel
+Motor direction is reversed| Swap that motor's output wires
+PWM speed control fails| ENA/ENB jumpers and LEDC configuration
+ESP32 restarts under load| Supply voltage drop and motor interference
+Bluetooth connection fails| ESP32 Bluetooth capability and library compatibility
+Firmware fails to compile| ESP32 board package and Dabble library
 
 ---
 
-⚠️ Power & Safety
-
-- 🔋 Use a suitable motor supply for your motor voltage and current.
-- 🔌 Never power motors directly from ESP32 GPIO pins.
-- 🔗 Keep ESP32 and L298N grounds connected.
-- 🚫 Never feed motor battery voltage into the ESP32 3.3 V pin.
-- 🛑 Disconnect power before changing connections.
-- 🧪 Test the car with its wheels raised before driving it on the ground.
-- ⚡ Check the L298N regulator and jumper configuration before applying power.
-
----
-
-📂 Repository Structure
+📂 Project Structure
 
 ESP32-Bluetooth-Car/
-│
-├── 📄 README.md
-├── 📁 src/
-│   └── 📄 BluetoothCar.ino
-│
-├── 📁 images/
-    ├── 🖼️ wiring-diagram.png
-    └── 🖼️ car-prototype
+├── README.md
+├── src/
+│   └── BluetoothCar.ino
+└── images/
+    ├── wiring-diagram.png
+    └── car-prototype.png
 
 ---
 
 👨‍💻 Developer
 
-<div align="center">🚀 TANVIR HUSSAIN
+<div align="center">Tanvir Hussain
 
-Robotics • Electronics • Embedded Programming
+Robotics · Electronics · Embedded Programming
 
 ""GitHub" (https://img.shields.io/badge/GitHub-TanvirCodeStorm-181717?style=for-the-badge&logo=github)" (https://github.com/TanvirCodeStorm)
 
-Building ideas into real-world projects, one line of code at a time. ⚡
+Turning code into motion. One project at a time. ⚡
 
 </div>---
 
-⭐ Support the Project
+<div align="center">🚗 ESP32 × L298N × Dabble
 
-If this project helps you learn robotics:
-
-- ⭐ Star the repository.
-- 🍴 Fork it and experiment.
-- 🛠️ Improve the design.
-- 📢 Share your build with other makers.
-
----
-
-<div align="center">⚡ CODE. CONNECT. DRIVE. ⚡
-
-ESP32 × L298N × Dabble
-
-Made with curiosity and a passion for robotics. 🤖
+CONNECT · CONTROL · DRIVE
 
 </div>
