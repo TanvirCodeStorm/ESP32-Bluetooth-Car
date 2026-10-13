@@ -1,4 +1,4 @@
-🚗 ESP32 Bluetooth Car — Dabble GamePad
+###🚗 ESP32 Bluetooth Car — Dabble GamePad
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white" alt="ESP32">
@@ -238,10 +238,6 @@ YOUR_REPOSITORY/
 └── images/
     ├── wiring-diagram.png
     └── car-prototype.png
-
-🖼️ Add Your Own Images Using GitHub Raw URLs
-
-Upload an image to your repository, then use its raw URL:
 
 ![Wiring Diagram](https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPOSITORY/main/images/wiring-diagram.png)
 
